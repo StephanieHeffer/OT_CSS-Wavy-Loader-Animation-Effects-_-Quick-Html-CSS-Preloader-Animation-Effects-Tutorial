@@ -1,0 +1,106 @@
+/*FAÇA COM O BODY BRANCO PRA IR VISUALIZANDO AS MODIFICAÇÕES
+
+
+
+
+O efeito de spinner circular é conseguido neste código através do uso de bordas arredondadas (border-radius: 50%) no elemento .loader. Quando você remove essa propriedade, o elemento deixa de ser um círculo e se torna um quadrado, como esperado. No entanto, o efeito de spinner ainda é visível porque cada <span> dentro do .loader é um quadrado que gira em torno de um ponto central.
+
+A razão pela qual você ainda vê um efeito de spinner circular, mesmo após remover o border-radius: 50%, é porque cada <span> ainda possui um border-radius: 50%. Esse border-radius nos elementos filhos cria a ilusão de um spinner circular, mesmo quando o contêiner pai não tem bordas arredondadas.
+
+Se você deseja que o efeito spinner seja quadrado, você precisa remover o border-radius: 50% tanto do .loader quanto dos <span> dentro dele. Aqui está o código atualizado:
+
+
+
+
+
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #fff;
+}
+
+.loader{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    transform: rotate(175deg);
+}
+
+.loader span{
+    position: absolute;
+    top: calc(12px * var(--i));
+    left: calc(12px * var(--i));
+    right: calc(12px * var(--i));
+    bottom: calc(12px * var(--i));
+    border: 10px solid #0b0b0b;
+    border-top: 10px solid #0f0;
+    border-left: 10px solid #0f0;
+    border-radius: 50%;
+    animation: animate 1s alternate ease-in-out infinite;
+    filter: hue-rotate(calc(60deg * var(--i)));
+    /* Essa linha CSS usa o filtro hue-rotate() para ajustar o matiz (hue) de uma imagem. Aqui está uma explicação detalhada:
+-filter: É uma propriedade CSS que permite aplicar efeitos visuais como filtros a um elemento, neste caso, provavelmente uma imagem ou um elemento com fundo colorido.
+-hue-rotate(angle): É uma função do filtro que gira o matiz (a cor) de um elemento de acordo com o ângulo especificado. Um ângulo de 0deg não altera a cor original.
+-calc(60deg * var(--i)): Esta é uma expressão CSS que usa a função calc() para calcular o valor do ângulo de rotação do matiz com base em uma variável --i. O valor dessa variável é definido e manipulado em algum lugar do CSS ou do JavaScript.Normalmente, valores de ângulo de rotação em múltiplos de 60 graus são comuns porque cada 60 graus no círculo de cores corresponde a uma rotação completa através do espectro de cores. Portanto, 60deg, 120deg, 180deg, etc., resultam em variações significativas na cor.
+Em resumo, essa linha de código está aplicando um filtro hue-rotate à imagem ou ao elemento com fundo colorido, onde o ângulo de rotação do matiz é calculado dinamicamente com base no valor da variável --i. Isso significa que a cor do elemento pode ser alterada dinamicamente de acordo com o valor de --i.
+*/
+    animation-delay: calc(-0.1s * var(--i)); 
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(90deg);
+    }
+}
+
+
+/**
+Claro! Esse CSS é usado para criar um visual de "spinner" ou carregador circular. Aqui está uma explicação linha por linha:
+
+.loader: Isso se refere à classe do elemento que contém o spinner.
+
+position: relative;: Define a posição como relativa para que os elementos filhos possam ser posicionados relativamente a este.
+width: 250px; height: 250px;: Define a largura e altura do spinner.
+border-radius: 50%;: Define um raio de borda de 50% para criar uma forma de círculo.
+overflow: hidden;: Garante que qualquer coisa além do círculo seja cortada (útil quando usamos bordas maiores que o círculo).
+.loader span: Isso se refere aos elementos <span> que são filhos do elemento com a classe .loader. Cada <span> representa uma das partes do spinner.
+
+position: absolute;: Define a posição absoluta para que os elementos <span> possam ser posicionados dentro do elemento pai .loader.
+top: calc(12px * var(--i)); bottom: calc(12px * var(--i)); right: calc(12px * var(--i)); left: calc(12px * var(--i));: Isso usa a função calc() para calcular o posicionamento dos elementos <span> com base em uma variável --i. Provavelmente, essa variável --i é definida e manipulada em algum lugar do CSS ou do JavaScript para controlar o posicionamento dos elementos <span>.
+border: 10px solid #0b0b0b;: Define uma borda sólida de 10px com a cor #0b0b0b para cada elemento <span>. Essas bordas criam as linhas do spinner.
+Em resumo, esse CSS cria um círculo (representado pelo elemento com a classe .loader) com vários elementos <span> posicionados dentro dele para formar as linhas do spinner. A variável --i é usada para controlar o posicionamento desses elementos <span>
+--------------------
+
+Claro! Este CSS é usado para criar um efeito de spinner giratório, onde as linhas coloridas se movem em um círculo. Aqui está uma explicação linha por linha:
+
+.loader: Isso se refere à classe do elemento que contém o spinner.
+
+position: relative;: Define a posição como relativa para que os elementos filhos possam ser posicionados relativamente a este.
+width: 250px; height: 250px;: Define a largura e altura do spinner.
+border-radius: 50%;: Define um raio de borda de 50% para criar uma forma de círculo.
+overflow: hidden;: Garante que qualquer coisa além do círculo seja cortada (útil quando usamos bordas maiores que o círculo).
+.loader span: Isso se refere aos elementos <span> que são filhos do elemento com a classe .loader. Cada <span> representa uma das partes do spinner.
+
+position: absolute;: Define a posição absoluta para que os elementos <span> possam ser posicionados dentro do elemento pai .loader.
+top: calc(12px * var(--i)); bottom: calc(12px * var(--i)); right: calc(12px * var(--i)); left: calc(12px * var(--i));: Isso usa a função calc() para calcular o posicionamento dos elementos <span> com base em uma variável --i. Provavelmente, essa variável --i é definida e manipulada em algum lugar do CSS ou do JavaScript para controlar o posicionamento dos elementos <span>.
+border: 10px solid #0b0b0b;: Define uma borda sólida de 10px com a cor #0b0b0b para cada elemento <span>. Essas bordas criam as linhas do spinner.
+border-top: 10px solid #0f0; border-bottom: 10px solid #0f0;: Adiciona uma borda superior e inferior de 10px com a cor #0f0 para cada elemento <span>. Isso cria a cor de destaque na parte superior e inferior das linhas do spinner.
+border-radius: 50%;: Define um raio de borda de 50% para cada elemento <span>, fazendo com que cada linha pareça um semicírculo.
+Em resumo, esse CSS cria um círculo (representado pelo elemento com a classe .loader) com várias linhas coloridas que giram dentro dele, formando um spinner animado. O posicionamento e o estilo das linhas são controlados por meio de cálculos de CSS e variáveis.
+**/
+

@@ -1,0 +1,72 @@
+/**
+CSS:
+.psy-effect: Esta classe é aplicada a uma seção HTML e é usada para centralizar o conteúdo vertical e horizontalmente dentro dessa seção. Isso é feito usando display: flex, justify-content: center e align-items: center.
+
+.loader: Esta classe é aplicada a uma div que contém os elementos de carregamento. Ela define as dimensões da div como 500x500 pixels e um border-radius de 50%, o que faz com que a div seja exibida como um círculo. O transform: rotate(175deg) faz com que a div seja inicialmente rotacionada em 175 graus.
+
+.loader span: Esta classe é aplicada aos elementos de carga individuais dentro da div .loader. Cada elemento é um quadrado que é posicionado absolutamente dentro da div .loader. Eles têm uma borda de 10px sólida com cores diferentes para criar um efeito visual interessante. Além disso, eles têm um border-radius de 50% para torná-los círculos. A propriedade filter: hue-rotate() é usada para girar a cor de cada elemento de carga, criando um efeito de arco-íris. A animação animation é aplicada a esses elementos para fazer com que eles girem, usando a chave de animação @keyframes animation.
+
+@keyframes animation: Esta regra define a animação que será aplicada aos elementos de carga. Começa com uma transformação de rotação de 0 graus no início da animação e termina com uma transformação de rotação de 90 graus no final da animação.
+
+HTML:
+O código HTML consiste em uma seção com a classe .psy-effect que contém uma div com a classe .loader e vários spans. Cada span representa um elemento de carregamento individual, e o atributo style é usado para definir a variável --i para cada um, que é usada no CSS para calcular a posição e o estilo de cada elemento de carregamento.
+
+Espero que isso esclareça o funcionamento do código! Se tiver mais alguma dúvida, sinta-se à vontade para perguntar.
+**/
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #fff;
+}
+
+.psy-effect{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+.loader{
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    transform: rotate(175deg);
+}
+
+.loader span{
+    position: absolute;
+    top: calc(12px * var(--i));
+    left: calc(12px * var(--i));
+    right: calc(12px * var(--i));
+    bottom: calc(12px * var(--i));
+    border: 10px solid #0b0b0b;
+    border-top: 10px solid #0f0;
+    border-left: 10px solid #0f0;
+    border-radius: 50%;
+    animation: animation 1s alternate ease-in-out infinite;
+    filter: hue-rotate(calc(60deg * var(--i)));
+    animation-delay: calc(-0.1s * var(--i)); 
+}
+
+@keyframes animation{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(90deg);
+    }
+}
+
+
